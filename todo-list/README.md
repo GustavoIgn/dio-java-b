@@ -1,55 +1,38 @@
-# Projeto iPhone UML
+# API de To-Do List - Projeto Individual
 
-Este projeto contém a modelagem UML e implementação em Java das funcionalidades do iPhone como Reprodutor Musical, Aparelho Telefônico e Navegador na Internet.
+Desenvolvi uma API de To-Do List utilizando Java 17 com Spring Boot 3, integrando tecnologias modernas para oferecer uma solução robusta e eficiente.
 
-## Diagrama UML do iPhone
+## Principais Tecnologias
 
-Este é o diagrama UML representando as funcionalidades do iPhone como Reprodutor Musical, Aparelho Telefônico e Navegador na Internet.
+Java 17: Aproveitei a versão LTS mais recente para garantir o uso das últimas inovações da linguagem, promovendo um desenvolvimento eficiente e atualizado.
+
+Spring Boot 3: Utilizei a mais recente versão do Spring Boot para maximizar a produtividade com sua poderosa autoconfiguração e integração simplificada.
+
+Spring Data JPA: Implementado para facilitar a camada de acesso aos dados e a integração com bancos de dados SQL de forma simplificada e eficaz.
+
+OpenAPI (Swagger): Criei uma documentação de API clara e compreensível, utilizando OpenAPI para garantir que a API seja bem documentada e fácil de usar.
+
+Railway: Utilizei Railway para deploy e monitoramento na nuvem, aproveitando suas funcionalidades para bancos de dados como serviço e pipelines de CI/CD.
 
 ```mermaid
 classDiagram
-    class ReprodutorMusical {
-        <<interface>>
-        +tocar()
-        +pausar()
-        +selecionarMusica(String musica)
+    class Todo {
+        -Long id
+        -String title
+        -Boolean completed
     }
-    
-    class AparelhoTelefonico {
-        <<interface>>
-        +ligar(String numero)
-        +atender()
-        +iniciarCorreioVoz()
+
+    class TodoList {
+        -Long id
+        -List<TodoItem> items
     }
-    
-    class NavegadorInternet {
-        <<interface>>
-        +exibirPagina(String url)
-        +adicionarNovaAba()
-        +atualizarPagina()
+
+    class User {
+        -Long id
+        -String username
+        -String password
+        -List<TodoList> todoLists
     }
-    
-    class iPhone {
-        -modelo: String
-        -numeroDeSerie: String
-        -musicas: List<String>
-        -musicaAtual: String
-        -contatos: Map<String, String>
-        -chamadaAtual: String
-        -abas: List<String>
-        -abaAtual: String
-        +iPhone(modelo: String, numeroDeSerie: String)
-        +tocar()
-        +pausar()
-        +selecionarMusica(String musica)
-        +ligar(String numero)
-        +atender()
-        +iniciarCorreioVoz()
-        +exibirPagina(String url)
-        +adicionarNovaAba()
-        +atualizarPagina()
-    }
-    
-    iPhone ..|> ReprodutorMusical
-    iPhone ..|> AparelhoTelefonico
-    iPhone ..|> NavegadorInternet
+
+    Todo --> TodoList : belongs to
+    TodoList --> User : owned by
